@@ -1,0 +1,15 @@
+My way of output PHP debug(trace) messages:
+
+ 1. Logon to the server, 
+ 2. w or who command showing the terminal TTY # like "pts/0"
+ 3. chmod 622 /dev/pts/0
+ 4. $fi = fopen( "file:///dev/pts/0", "wt" ); to open the terminal for debug message output
+ 5. fwrite( $fi, 'time()'.PHP_EOL ); to write debug messages
+ 6. Using ANSI escape code to control the cursor pos, colors, clrscreen, etc.
+ 7. ANSI excape code reference: http://en.wikipedia.org/wiki/ANSI_escape_code
+ 8. Example ANSI code: 
+ 9. fwrite( $fi, "\x1b[3,40H" ); // move cursor to (3, 40)
+10. $lno++;	fwrite( $fi, "\x1b[{$lno};30H" ); // move cusor to next row
+11. fwrite( $fi, "\x1b[30;107m"); // 30 + x, 100 + x foreground and background colors
+12. fwrite( $fi, "\x1b[2J" ); // clear screen
+13. fclose( $fi ); 
