@@ -61,6 +61,6 @@ function debuginfo(){
 	fclose( $fi );
 }
 
-	debuginfo();
+debuginfo();
 ?>
 
